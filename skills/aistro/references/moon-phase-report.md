@@ -11,30 +11,32 @@ Generate a lunar influence reading combining the current moon phase with the use
 
 ## Moon Phase Determination
 
-Determine the current moon phase for the target date:
+Run the moon phase script for the target date:
+```bash
+node scripts/moon-phase.mjs --date "<YYYY-MM-DD>"
+```
 
-| Phase | Chinese | Emoji | Approximate Timing |
-|---|---|---|---|
-| New Moon | 新月 | 🌑 | Day 0 |
-| Waxing Crescent | 眉月 | 🌒 | Day 1–6 |
-| First Quarter | 上弦月 | 🌓 | Day 7 |
-| Waxing Gibbous | 盈凸月 | 🌔 | Day 8–13 |
-| Full Moon | 满月 | 🌕 | Day 14 |
-| Waning Gibbous | 亏凸月 | 🌖 | Day 15–20 |
-| Last Quarter | 下弦月 | 🌗 | Day 21 |
-| Waning Crescent | 残月 | 🌘 | Day 22–28 |
+Map the returned `phaseText` to display:
 
-Use lunar cycle knowledge: a full cycle ≈ 29.5 days. Use known recent new moon dates as reference anchors to calculate the current phase.
+| phaseText | Chinese | Emoji |
+|---|---|---|
+| new_moon | 新月 | 🌑 |
+| waxing_crescent_moon | 眉月 | 🌒 |
+| first_quarter_moon | 上弦月 | 🌓 |
+| waxing_gibbous_moon | 盈凸月 | 🌔 |
+| full_moon | 满月 | 🌕 |
+| waning_gibbous_moon | 亏凸月 | 🌖 |
+| last_quarter_moon | 下弦月 | 🌗 |
+| waning_crescent_moon | 残月 | 🌘 |
 
 ## Retrograde Planet Check
 
-Determine which planets are currently retrograde on the target date. Common retrogrades:
-- Mercury retrograde (3× per year, ~3 weeks each)
-- Venus retrograde (~every 18 months, ~40 days)
-- Mars retrograde (~every 26 months, ~2.5 months)
-- Jupiter retrograde (~4 months/year)
-- Saturn retrograde (~4.5 months/year)
-- Uranus, Neptune, Pluto retrograde (~5-6 months/year)
+Run the horoscope script for the target date to get retrograde planets:
+```bash
+node scripts/horoscope.mjs --birthDate "<target date>T12:00:00" --longitude <lng> --latitude <lat>
+```
+
+The `retrogradeStars` array in the output contains the currently retrograde planets.
 
 ## Output Structure
 

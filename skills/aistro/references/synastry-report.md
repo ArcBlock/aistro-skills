@@ -11,8 +11,16 @@ Generate a compatibility analysis comparing two people's birth charts, examining
 
 ## Astrology Calculation
 
-Determine both people's planetary placements, then compare:
-- Planet-to-planet aspects between charts (e.g., Person A's Venus conjunct Person B's Mars)
+Run the horoscope script for both people:
+```bash
+# User's chart
+node scripts/horoscope.mjs --birthDate "<user birth ISO date>" --longitude <lng> --latitude <lat>
+# Partner's chart
+node scripts/horoscope.mjs --birthDate "<partner birth ISO date>" --longitude <lng> --latitude <lat>
+```
+
+Based on both charts' `decimalDegrees` data, analyze:
+- Planet-to-planet aspects between charts by calculating angular distances (e.g., if Person A's Venus and Person B's Mars are within 8° → conjunct)
 - Sign compatibility per planet
 - House overlays (where each person's planets fall in the other's houses)
 
@@ -60,11 +68,15 @@ Prompt pattern (from original):
 
 ### Overall Score (40–100)
 
-A compatibility score based on the overall aspect pattern.
+Generate using the random score script with a deterministic seed:
+```bash
+node scripts/random-score.mjs --seed "<userBirthDate>:<partnerBirthDate>:synastry"
+```
+Example: `node scripts/random-score.mjs --seed "1990-06-15:1992-11-20:synastry"`
 
 ### Per-Planet Sections
 
-For each of the 7 planets, generate 4 parts:
+For each of the 7 planets, generate 1 title + 3 sections:
 
 #### Section Title (≤50 characters)
 

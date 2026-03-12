@@ -11,12 +11,16 @@ Generate a daily horoscope prediction combining the user's natal chart with curr
 
 ## Astrology Calculation
 
-Determine two charts:
-1. **User's natal chart** — planetary positions at birth
-2. **Transit chart for target date** — current planetary positions
+Run the horoscope script twice to compute both charts:
+```bash
+# User's natal chart
+node scripts/horoscope.mjs --birthDate "<birth ISO date>" --longitude <lng> --latitude <lat>
+# Transit chart for target date
+node scripts/horoscope.mjs --birthDate "<target date>T12:00:00" --longitude <lng> --latitude <lat>
+```
 
-Compare transits to natal positions to identify:
-- Active aspects (transiting planets aspecting natal planets)
+Based on both charts' `decimalDegrees` data, analyze:
+- Aspects between transiting and natal planets (conjunctions, oppositions, trines, squares, sextiles — use standard orbs)
 - House activations (transiting planets entering natal houses)
 - Significant transits (Saturn return, Jupiter transit, etc.)
 
@@ -77,7 +81,11 @@ Prompt pattern (from original):
 For each topic, generate 4 parts + a score:
 
 #### Score (40–100)
-Assign a score for this topic area.
+Generate using the random score script with a deterministic seed:
+```bash
+node scripts/random-score.mjs --seed "<birthDate>:<targetDate>:<topic>" --with-category
+```
+Example: `node scripts/random-score.mjs --seed "1990-06-15:2026-03-12:career" --with-category`
 
 #### Section 1: Overview (≤140 words)
 

@@ -154,8 +154,7 @@ Aistro 会自动检测你使用的语言并以相同语言回复。在中文、�
 
 ## 相关项目
 
-- [Aistro iOS App](https://apps.apple.com/app/aistro) - AI 驱动的 iOS 占星应用
-- [MyVibe](https://www.myvibe.so) - AI 驱动的 Web 项目托管平台
+- [Aistro](https://www.aistro.io/) - AI 驱动的占星咨询平台
 
 ## 支持
 

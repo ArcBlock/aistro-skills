@@ -2,7 +2,7 @@
 
 ## Overview
 
-Generate a comprehensive birth chart analysis examining each planet's placement in the user's chart. This report is the most detailed — it covers 10 planets, each with 4 sub-sections.
+Generate a comprehensive birth chart analysis examining each planet's placement in the user's chart. This report is the most detailed — it covers 10 planets, each with 1 title + 3 detail sections.
 
 ## Input Required
 
@@ -10,12 +10,12 @@ Generate a comprehensive birth chart analysis examining each planet's placement 
 
 ## Astrology Calculation
 
-Based on the user's birth data, determine:
-- Each planet's zodiac sign placement (e.g., Sun in Aries)
-- Each planet's house placement (e.g., Sun in 7th House)
-- Key aspects between planets (conjunctions, oppositions, trines, squares, sextiles)
+Run the horoscope script to compute the user's chart:
+```bash
+node scripts/horoscope.mjs --birthDate "<ISO date>" --longitude <lng> --latitude <lat>
+```
 
-Present the full star chart summary before the detailed sections:
+From the output, extract each planet's sign and house placement. Present the full star chart summary before the detailed sections:
 ```
 Stars: Sun in Aries/7th House, Moon in Cancer/10th House, Mercury in Pisces/6th House, ...
 ```

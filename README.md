@@ -154,8 +154,7 @@ Contributions are welcome! Please open an [issue](https://github.com/ArcBlock/ai
 
 ## Related Projects
 
-- [Aistro iOS App](https://apps.apple.com/app/aistro) - AI-powered astrology app for iOS
-- [MyVibe](https://www.myvibe.so) - AI-powered web project hosting platform
+- [Aistro](https://www.aistro.io/) - AI-powered astrology consultation platform
 
 ## Support
 

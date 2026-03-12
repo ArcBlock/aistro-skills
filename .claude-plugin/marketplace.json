@@ -1,0 +1,22 @@
+{
+  "name": "aistro-skills",
+  "owner": {
+    "name": "ArcBlock",
+    "email": "contact@arcblock.io"
+  },
+  "metadata": {
+    "description": "Aistro Skills - Professional AI-powered astrology consultation with personalized readings and reports",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "aistro",
+      "description": "Professional astrology consultation skill providing birth chart analysis, daily horoscopes, compatibility reports, and moon phase readings",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/aistro"
+      ]
+    }
+  ]
+}

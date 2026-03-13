@@ -42,28 +42,29 @@ Store this in conversation context. If already provided, do not ask again.
 
 This skill includes scripts in `scripts/` for precise astronomical calculations. **Always use these scripts instead of estimating.**
 
-Install dependencies first (one-time):
+**IMPORTANT — Dependency check:** Before running any script, ensure dependencies are installed. Run this once at the start of each session:
 ```bash
-cd skills/aistro/scripts && npm install
+cd skills/aistro/scripts && [ -d node_modules ] || npm install
 ```
+If a script fails with `Cannot find module` or `ERR_MODULE_NOT_FOUND`, run `cd skills/aistro/scripts && npm install` to fix it.
 
 ### Horoscope (birth chart + retrograde detection)
 ```bash
-node scripts/horoscope.mjs --birthDate "1990-06-15T08:30:00" --longitude 116.4074 --latitude 39.9042
+node skills/aistro/scripts/horoscope.mjs --birthDate "1990-06-15T08:30:00" --longitude 116.4074 --latitude 39.9042
 ```
 Returns `{ stars, chartData, retrogradeStars }` — planetary placements in signs/houses and which planets are retrograde.
 
 ### Moon Phase
 ```bash
-node scripts/moon-phase.mjs --date "2026-03-12"
+node skills/aistro/scripts/moon-phase.mjs --date "2026-03-12"
 ```
 Returns `{ phaseText, lunarDay }` — exact lunar phase for the given date.
 
 ### Random Score
 ```bash
-node scripts/random-score.mjs                                              # → random { score }
-node scripts/random-score.mjs --seed "1990-06-15:2026-03-12:career"        # → deterministic { score }
-node scripts/random-score.mjs --seed "1990-06-15:2026-03-12:career" --with-category  # → { score, category }
+node skills/aistro/scripts/random-score.mjs                                              # → random { score }
+node skills/aistro/scripts/random-score.mjs --seed "1990-06-15:2026-03-12:career"        # → deterministic { score }
+node skills/aistro/scripts/random-score.mjs --seed "1990-06-15:2026-03-12:career" --with-category  # → { score, category }
 ```
 Returns a score (40–100). Use `--seed` to produce stable, deterministic scores — the same seed always yields the same score. Recommended seed formats:
 - **Predict Report:** `"<birthDate>:<targetDate>:<topic>"` (e.g., `"1990-06-15:2026-03-12:career"`)

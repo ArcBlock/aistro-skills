@@ -53,15 +53,40 @@ function getHoroscope({ birthDate, longitude, latitude }) {
   });
 }
 
+// Determine the correct house for a planet based on cusp positions.
+// Fixes circular-natal-horoscope-js bug where planets in [0°, ASC) are
+// incorrectly assigned to House 1 instead of House 12 when House 12
+// cusp wraps around 0°/360°.
+function determineHouse(planetDeg, cusps) {
+  for (let i = 0; i < 12; i++) {
+    const start = cusps[i];
+    const end = cusps[(i + 1) % 12];
+    if (start <= end) {
+      if (planetDeg >= start && planetDeg < end) return i + 1;
+    } else {
+      // House wraps around 0°/360°
+      if (planetDeg >= start || planetDeg < end) return i + 1;
+    }
+  }
+  return 1;
+}
+
 function getHoroscopeData(horoscope) {
   const all = horoscope.CelestialBodies.all;
   const m = Object.fromEntries(all.map((i) => [i.key, i]));
   const bodies = STARS.map((star) => m[star]).filter(Boolean);
 
+  const cusps = horoscope.Houses.map(
+    (i) => i.ChartPosition.StartPosition.Ecliptic.DecimalDegrees
+  );
+
   const stars = bodies.map((i) => ({
     star: i.key,
     sign: i.Sign?.key,
-    house: i.House?.id ?? 1,
+    house: determineHouse(
+      i.ChartPosition?.Ecliptic?.DecimalDegrees,
+      cusps
+    ),
     decimalDegrees: i.ChartPosition?.Ecliptic?.DecimalDegrees,
     arcDegreesFormatted30: i.ChartPosition?.Ecliptic?.ArcDegreesFormatted30?.replace(
       /\d+'{2,}$/,

@@ -1,20 +1,20 @@
 #!/usr/bin/env node
 
 // Moon phase calculation script — replicates the reference project's Get Moon Phase tool
-// Uses the same Julian Date Number algorithm from lunarphase-calculator@1.1.0
-// (package was unpublished from npm, so the calculation logic is inlined here)
+// Uses circular-natal-horoscope-js to get actual Sun/Moon ecliptic longitudes,
+// then determines phase from the Moon-Sun elongation angle.
 //
 // Usage:
 //   node moon-phase.mjs --date "2026-03-12"
 //
 // Output: JSON with { phaseText, lunarDay }
 
-import dayjs from "dayjs";
+import pkg from "circular-natal-horoscope-js";
+const { Horoscope, Origin } = pkg;
 
-// Constants from lunarphase-calculator@1.1.0
 const SYNODIC_MONTH = 29.53058770576;
-const START_DATE = 2451550.1; // Reference Julian date for lunar cycle
 
+// Phase boundaries (in lunar days, derived from elongation)
 const PHASE_BOUNDARIES = {
   NEW_MOON_LOWER: 0,
   WAXING_CRESCENT: 1,
@@ -28,26 +28,35 @@ const PHASE_BOUNDARIES = {
   NEW_MOON_UPPER_END: 29.530588,
 };
 
-// Convert date to Julian Date Number (Gregorian calendar)
-function toJDN(date) {
-  const n = date.getUTCDate();
-  const e = date.getUTCMonth() + 1;
-  const a = date.getUTCFullYear();
-  const s = Math.trunc((14 - e) / 12);
-  const u = a + 4800 - s;
-  const I = e + 12 * s - 3;
-  const _ = Math.trunc((153 * I + 2) / 5);
-  const o = Math.trunc(u / 4);
-  const c = Math.trunc(u / 100);
-  const E = Math.trunc(u / 400);
-  return n + _ + 365 * u + o - c + E - 32045;
+// Get Sun and Moon ecliptic longitudes for a given date using the Moshier ephemeris.
+// Location is irrelevant for geocentric ecliptic longitude, so we use (0, 0).
+function getSunMoonPositions(date) {
+  const horoscope = new Horoscope({
+    origin: new Origin({
+      year: date.getUTCFullYear(),
+      month: date.getUTCMonth(),
+      date: date.getUTCDate(),
+      hour: date.getUTCHours(),
+      minute: date.getUTCMinutes(),
+      second: date.getUTCSeconds(),
+      latitude: 0,
+      longitude: 0,
+    }),
+  });
+
+  const bodies = horoscope.CelestialBodies.all;
+  const map = Object.fromEntries(bodies.map((b) => [b.key, b]));
+  return {
+    sun: map.sun.ChartPosition.Ecliptic.DecimalDegrees,
+    moon: map.moon.ChartPosition.Ecliptic.DecimalDegrees,
+  };
 }
 
-// Calculate lunar day (0 to ~29.53)
+// Calculate lunar day from Sun-Moon elongation
 function getLunarDay(date) {
-  const jdn = toJDN(date);
-  const r = ((jdn - START_DATE) / SYNODIC_MONTH) % 1;
-  return (r < 0 ? r + 1 : r) * SYNODIC_MONTH;
+  const { sun, moon } = getSunMoonPositions(date);
+  const elongation = ((moon - sun) % 360 + 360) % 360;
+  return (elongation / 360) * SYNODIC_MONTH;
 }
 
 // Determine moon phase from lunar day

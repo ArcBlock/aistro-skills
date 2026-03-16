@@ -99,19 +99,63 @@ npx skills add ArcBlock/aistro-skills
 
 就这么简单！技能会自动收集你的出生信息并生成个性化解读。
 
+## OpenClaw 集成
+
+Aistro 可以作为 [OpenClaw](https://openclaw.ai/) 技能使用，将占星带到你喜欢的聊天应用中 — Telegram、Discord、WhatsApp 等。从 [ClawHub](https://clawhub.ai/lban2049/aistro) 安装。
+
+| 场景 | 描述 | 聊天示例 |
+|------|------|----------|
+| **私聊占星** | 与 bot 私聊获取个性化星盘解读 | `帮我看看本命盘，1990年3月15日下午2:30北京出生` |
+| **群聊星座互动** | 在群里 @bot 快速查询星座运势 | `@aistro 双鱼座今天运势怎么样？` |
+| **每日运势推送** | 通过定时任务每天自动推送运势 | 每天早上 8 点收到你的星座运势 |
+
+> 查看完整配置指南：[OpenClaw 集成指南](./docs/openclaw-guide.md)
+
 ## 报告类型
 
 ### 本命盘报告
 分析出生星盘中的 10 颗行星（太阳、月亮、水星、金星、火星、木星、土星、天王星、海王星、冥王星），每颗行星包含标题、优势、机遇和挑战。
 
+```
+/aistro I was born on March 15, 1990 at 2:30 PM in Beijing. What does my birth chart say?
+```
+
+<p align="center">
+  <img src="./screenshots/natal-report.png" alt="本命盘报告示例" width="700">
+</p>
+
 ### 运势报告
 将本命盘与当前行星过境进行对比的每日运势。涵盖 5 个主题：事业、感情、财富、创造力和健康——每个主题都有评分（40-100）和详细分析。
+
+```
+/aistro What's my horoscope for today? I was born on March 15, 1990 at 2:30 PM in Beijing.
+```
+
+<p align="center">
+  <img src="./screenshots/predict-report.png" alt="运势报告示例" width="700">
+</p>
 
 ### 合盘报告
 检查两个人出生星盘中 7 颗行星（太阳、月亮、水星、金星、火星、木星、土星）的兼容性分析。提供总分和每颗行星的相似点与差异点。
 
+```
+/aistro Check compatibility between me (March 15, 1990, 2:30 PM, Beijing) and my partner (July 22, 1988, 10:00 AM, Shanghai)
+```
+
+<p align="center">
+  <img src="./screenshots/synastry-report.png" alt="合盘报告示例" width="700">
+</p>
+
 ### 月相报告
 基于当前月相结合本命盘的解读。包含逆行行星的影响以及事业、感情和财富方面的实用指导。
+
+```
+/aistro What does the current moon phase mean for me? I was born on March 15, 1990 at 2:30 PM in Beijing.
+```
+
+<p align="center">
+  <img src="./screenshots/moon-phase-report.png" alt="月相报告示例" width="700">
+</p>
 
 ## 常见问题
 

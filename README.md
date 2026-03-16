@@ -99,19 +99,63 @@ Just tell your AI assistant what you want in natural language:
 
 That's it! The skill collects your birth information and generates personalized readings automatically.
 
+## OpenClaw Integration
+
+Aistro works as an [OpenClaw](https://openclaw.ai/) skill, bringing astrology to your favorite chat apps — Telegram, Discord, WhatsApp, and more. Install from [ClawHub](https://clawhub.ai/lban2049/aistro).
+
+| Scenario | Description | Chat Example |
+|----------|-------------|--------------|
+| **DM Astrology Chat** | Private conversation with the bot for personalized readings | `What does my birth chart say? Born March 15, 1990, 2:30 PM, Beijing` |
+| **Group Zodiac Fun** | @mention the bot in group chats for quick zodiac-based readings | `@aistro What's today's vibe for Pisces?` |
+| **Daily Horoscope Push** | Automated daily horoscope delivery via cron job | Receive your morning horoscope at 8 AM every day |
+
+> See the full setup guide: [OpenClaw Integration Guide](./docs/openclaw-guide.md)
+
 ## Report Types
 
 ### Natal Report
 Analyzes 10 planets (Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto) in your birth chart. Each planet includes a title, strengths, opportunities, and challenges.
 
+```
+/aistro I was born on March 15, 1990 at 2:30 PM in Beijing. What does my birth chart say?
+```
+
+<p align="center">
+  <img src="./screenshots/natal-report.png" alt="Natal Report Example" width="700">
+</p>
+
 ### Predict Report
 Daily horoscope comparing your natal chart with current planetary transits. Covers 5 topics: Career, Love, Wealth, Creativity, and Health — each with a score (40-100) and detailed analysis.
+
+```
+/aistro What's my horoscope for today? I was born on March 15, 1990 at 2:30 PM in Beijing.
+```
+
+<p align="center">
+  <img src="./screenshots/predict-report.png" alt="Predict Report Example" width="700">
+</p>
 
 ### Synastry Report
 Compatibility analysis examining 7 planets (Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn) between two birth charts. Provides an overall score and per-planet breakdown of similarities and differences.
 
+```
+/aistro Check compatibility between me (March 15, 1990, 2:30 PM, Beijing) and my partner (July 22, 1988, 10:00 AM, Shanghai)
+```
+
+<p align="center">
+  <img src="./screenshots/synastry-report.png" alt="Synastry Report Example" width="700">
+</p>
+
 ### Moon Phase Report
 Reading based on the current moon phase combined with your natal chart. Includes retrograde planet influences and practical guidance for career, love, and wealth.
+
+```
+/aistro What does the current moon phase mean for me? I was born on March 15, 1990 at 2:30 PM in Beijing.
+```
+
+<p align="center">
+  <img src="./screenshots/moon-phase-report.png" alt="Moon Phase Report Example" width="700">
+</p>
 
 ## FAQ
 

@@ -10,13 +10,16 @@
 
 ## Installation
 
-```bash
-npx skills add ArcBlock/aistro-skills
+Tell your OpenClaw bot to install the skill — just send this message directly:
+
+```
+Please run `npx skills add ArcBlock/aistro-skills` to install the Aistro skill.
 ```
 
 Also available on [ClawHub](https://clawhub.ai/lban2049/aistro). After installation, restart your OpenClaw session. The skill loads automatically.
 
-## Exec Approval
+<details>
+<summary><b>Troubleshooting: Exec Approval Required</b></summary>
 
 OpenClaw requires approval before executing skill commands for security. When the bot runs Aistro, you may see:
 
@@ -38,6 +41,8 @@ Approve the execution from the Web UI or terminal UI when prompted. This is the 
 If you prefer a smoother experience (especially for scheduled tasks like daily horoscopes), enable exec approvals directly in your chat channel. See the [official documentation](https://docs.openclaw.ai/tools/exec-approvals) for setup instructions.
 
 > **Note:** Option B is recommended for the [Daily Horoscope Push](#scenario-3-daily-horoscope-push) scenario, since scheduled tasks run unattended and cannot wait for manual approval.
+
+</details>
 
 ## Scenario 1: DM Astrology Chat
 
